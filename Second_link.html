@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.container{
+
+/* Устанавливает счётчик названный cnt равным нулю */
+counter-reset: cnt;
+position:relative;
+text-align:center;
+padding:20px 0;
+width:420px;
+height: 160px;
+margin: 0 auto;
+}
+
+/*Вы можете прописать стиль для псевдоэлементов и задать им контент, как если бы они были реальными элементами на странице */
+
+.container::before{
+display: block;
+;
+font-size:18px;
+font-weight:bold;
+text-align:center;
+padding:15px;
+}
+
+.container span{
+display:inline-block;
+padding:2px 6px;
+background-color:#78CCD2;
+color:#186C72;
+border-radius:4px;
+margin:3px;
+cursor:default;
+}
+
+/*Создать счётчик с псевдоэлементом*/
+
+.container span::after{
+
+/* Каждый раз, когда будет применимо это правило, значение счётчика будет увеличено на 1 */
+counter-increment: cnt;
+
+/* Добавить к значению счётчика часть контента */
+content:" #" counter(cnt);
+
+display:inline-block;
+padding:4px;
+}
+
+/* Псевдоэлементы могут получить доступ к атрибутам их родителей */
+
+.container span::before{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+content:attr(data-title);
+color:#666;
+
+opacity:0;
+
+/* Анимация переходов */
+-webkit-transition:opacity 0.4s;
+transition:opacity 0.4s;
+}
+
+.container span:hover::before{
+opacity:1;
+}
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Генерируемый контент</h1>
+        <span data-title="Какой прекрасный заголовок!">Кнопка</span>
+        <span data-title="Эти заголовки показываются только с помощью CSS и никакого яваскрипта!">Кнопка</span>
+        <span data-title="Эй! Привет!">Кнопка</span>
+        <span data-title="Генерируемый контент - эт крутяк!">Кнопка</span>
+    </div>
+</body>
+</html>
